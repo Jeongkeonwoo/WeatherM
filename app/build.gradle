@@ -28,4 +28,15 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'com.squareup.okhttp3:okhttp:4.2.0'
+
+    // retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
+    // convert
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'     // Gson 처리시
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.2'  // String 처리시
+
+    // log
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.0'
 }

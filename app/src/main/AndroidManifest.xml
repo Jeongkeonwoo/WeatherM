@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.weatherm">
 
-<!--    인터넷 허용 권한-->
+    <!--인터넷 허용 권한-->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
