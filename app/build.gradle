@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.weatherm"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,21 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
+
+    // retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
+    // convert
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'     // Gson 처리시
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.2'  // String 처리시
+
+    // log
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.0'
+
 }
