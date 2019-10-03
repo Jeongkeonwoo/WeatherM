@@ -19,7 +19,7 @@ public class PresentFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_present, null);
-        TextView textView = view.findViewById(R.id.text);
+        TextView textView = view.findViewById(R.id.present_weather_text1);
 
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         return view;
