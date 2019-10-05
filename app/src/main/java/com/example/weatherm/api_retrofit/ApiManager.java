@@ -26,7 +26,11 @@ public class ApiManager {
 
     private ApiManager() {
 
-//        https://api.openweathermap.org/data/2.5/weather?q=Seoul&APPID=10465524bfe7eaa71c4010cb81b84a11
+        // 1. 현재 서울 날씨
+        // api.openweathermap.org/data/2.5/weather?q=Seoul&APPID=10465524bfe7eaa71c4010cb81b84a11
+
+        // 2. 서울 날씨 : 3시간 간격
+        // api.openweathermap.org/data/2.5/forecast?q=Seoul&APPID=10465524bfe7eaa71c4010cb81b84a11
 
         // log
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

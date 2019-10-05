@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -20,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
         return new Intent(activity, MainActivity.class);
     }
 
-    private ProgressDialog pd;//view 에서 다른 view 로 넘어갈때 로딩?
-
-    private WeatherManager weatherManager;
+    // 사용자의 입력을 제한
+    // 화면전환, api 요청시에 사용
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.tab);
         tabLayout.setupWithViewPager(viewPager);
-
-
-//        showProgress("날씨 요청 중입니다.");
-//        weatherManager = new WeatherManager(this, new WeatherManager.OnChangeWeather() {
-//            @Override
-//            public void change(WeatherData weatherData) {
-//                hideProgress();
-//
-//                String temp = WeatherUtil.getCelsius(weatherData.getMain().getTemp());
-//             //   tvTemp.setText(temp);
-//            }
-//        });
-
     }
 
 

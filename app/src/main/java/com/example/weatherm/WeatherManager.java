@@ -1,6 +1,7 @@
 package com.example.weatherm;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -23,32 +24,33 @@ import okhttp3.Response;
 
 public class WeatherManager {
 
-    private Context context;
+    private Activity activity;
     private OnChangeWeather onChangeWeather;
 
     // 날씨
     private ApiManager apiManager;
 
-    public WeatherManager(Context context, OnChangeWeather onChangeWeather) {
-        this.context = context;
+    public WeatherManager(Activity activity, OnChangeWeather onChangeWeather) {
+        this.activity = activity;
         this.onChangeWeather = onChangeWeather;
 
         apiManager = ApiManager.getInstance();
 
         // 위치 확인
-        final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        final LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
-
-        if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // 권한 없으면 메소드 실행 중지
             return;
         }
 
         // 5분마다 or 100m 마다 위치 정보 갱신
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                30000, 100, mLocationListener);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                30000, 100, mLocationListener);
+        locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, mLocationListener, null);
+
+//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+//                30000, 100, mLocationListener);
+//        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+//                30000, 100, mLocationListener);
     }
 
     private final LocationListener mLocationListener = new LocationListener() {
@@ -58,8 +60,8 @@ public class WeatherManager {
             double latitude = location.getLatitude();  // 위도
             double longitude = location.getLongitude(); // 경도
 
-            String lat = String.valueOf((int) latitude);
-            String lon = String.valueOf((int) longitude);
+            String lat = String.format("%.2f", latitude);
+            String lon = String.format("%.2f", longitude);
 
             requestWeather(lat, lon);
         }
@@ -102,7 +104,11 @@ public class WeatherManager {
             @Override
             public void onFailure(retrofit2.Call<WeatherData> call, Throwable t) {
                 Log.d("Retrofit", "onFailure");
-                Toast.makeText(context, "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show();
+
+                if (activity instanceof MainActivity) {
+                    ((MainActivity) activity).hideProgress();
+                }
             }
         });
     }
@@ -130,7 +136,7 @@ public class WeatherManager {
         // OkHttp로 통신 끝
     }
 
-    interface OnChangeWeather {
+    public interface OnChangeWeather {
         void change(WeatherData weatherData);
     }
 }

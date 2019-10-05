@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="80dp"
             android:text="현재 도시"
-            android:textColor="#702020"
+            android:textColor="@color/colorAccent"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -28,10 +28,9 @@
 
         <ImageView
             android:id="@+id/present_weather_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_margin="30dp"
-            android:src="@mipmap/ic_launcher"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/present_weather_city" />
@@ -42,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="60dp"
             android:text="온도"
-            android:textColor="#702020"
+            android:textColor="@color/colorAccent"
             android:textSize="50sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -1,5 +1,7 @@
 package com.example.weatherm;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 public class WeatherData {
@@ -87,14 +89,14 @@ public class WeatherData {
          * lat : 35
          */
 
-        private int lon;
-        private int lat;
+        private double lon;
+        private double lat;
 
-        public int getLon() {
+        public double getLon() {
             return lon;
         }
 
-        public int getLat() {
+        public double getLat() {
             return lat;
         }
     }
