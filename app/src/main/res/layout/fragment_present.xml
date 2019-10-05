@@ -15,11 +15,11 @@
         android:layout_weight="3">
 
         <TextView
-            android:id="@+id/present_weather_text"
+            android:id="@+id/present_weather_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="80dp"
-            android:text="현재 위치"
+            android:text="현재 도시"
             android:textColor="#702020"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -34,10 +34,10 @@
             android:src="@mipmap/ic_launcher"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/present_weather_text" />
+            app:layout_constraintTop_toBottomOf="@id/present_weather_city" />
 
         <TextView
-            android:id="@+id/present_weather_text2"
+            android:id="@+id/present_weather_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="60dp"
@@ -60,7 +60,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/present"
+        android:id="@+id/present_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

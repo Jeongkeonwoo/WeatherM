@@ -133,5 +133,4 @@ public class WeatherManager {
     interface OnChangeWeather {
         void change(WeatherData weatherData);
     }
-
 }

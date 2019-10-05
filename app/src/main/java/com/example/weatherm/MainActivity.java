@@ -20,11 +20,9 @@ public class MainActivity extends AppCompatActivity {
         return new Intent(activity, MainActivity.class);
     }
 
-    private ProgressDialog pd;
+    private ProgressDialog pd;//view 에서 다른 view 로 넘어갈때 로딩?
 
     private WeatherManager weatherManager;
-
-    private TextView tvTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +38,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
-        tvTemp = findViewById(R.id.tvTemp);
-
-        showProgress("날씨 요청 중입니다.");
-        weatherManager = new WeatherManager(this, new WeatherManager.OnChangeWeather() {
-            @Override
-            public void change(WeatherData weatherData) {
-                hideProgress();
-
-                String temp = WeatherUtil.getCelsius(weatherData.getMain().getTemp());
-                tvTemp.setText(temp);
-            }
-        });
+//        showProgress("날씨 요청 중입니다.");
+//        weatherManager = new WeatherManager(this, new WeatherManager.OnChangeWeather() {
+//            @Override
+//            public void change(WeatherData weatherData) {
+//                hideProgress();
+//
+//                String temp = WeatherUtil.getCelsius(weatherData.getMain().getTemp());
+//             //   tvTemp.setText(temp);
+//            }
+//        });
 
     }
 
