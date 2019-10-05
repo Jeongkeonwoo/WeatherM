@@ -41,7 +41,7 @@ public class PresentFragment extends Fragment {
         ArrayList<Data> data = new ArrayList<>();
 
         for (int i = 0; i < WEATHER; i++ ){
-            data.add(new Data(R.mipmap.ic_launcher, i+1+""));
+            //data.add(new Data(R.mipmap.ic_launcher, " "));
         }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);

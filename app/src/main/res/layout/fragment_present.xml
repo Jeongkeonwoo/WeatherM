@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="80dp"
             android:text="현재 도시"
-            android:textColor="#702020"
+            android:textColor="@color/colorAccent"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="60dp"
             android:text="온도"
-            android:textColor="#702020"
+            android:textColor="@color/colorAccent"
             android:textSize="50sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -51,7 +51,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#414040"
+            android:background="#312F2F"
+            android:textColor="@color/colorAccent"
             android:text="오늘 온도"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -62,6 +63,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/present_recyclerview"
         android:layout_width="match_parent"
+        android:padding="8dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal" />

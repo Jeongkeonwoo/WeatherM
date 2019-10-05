@@ -39,18 +39,11 @@ public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeH
     public void onBindViewHolder(@NonNull DaytimeHolder holder, int position) {
         Data data = dataList.get(position);
 
-//        holder.daytime_weather_weekly.setText(data.getText());
-//        holder.daytime_weather_date.setText(data.getText());
-//        holder.daytime_weather_icon.setImageResource(data.getImg());
-//        holder.daytime_weather_hightemperature.setText(data.getText());
-//        holder.daytime_weather_lowtemperature.setText(data.getText());
-
-
-        holder.daytime_weather_weekly.setText(data.getText() + "토 요일");
-        holder.daytime_weather_date.setText(data.getText() + "날짜");
+        holder.daytime_weather_weekly.setText(data.getWeekly());
+        holder.daytime_weather_date.setText(data.getDate());
         holder.daytime_weather_icon.setImageResource(data.getImg());
-        holder.daytime_weather_hightemperature.setText(data.getText() + "19도");
-        holder.daytime_weather_lowtemperature.setText(data.getText() + "17도");
+        holder.daytime_weather_hightemperature.setText(data.getHight());
+        holder.daytime_weather_lowtemperature.setText(data.getLow());
     }
 
     @Override

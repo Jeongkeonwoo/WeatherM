@@ -37,9 +37,9 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.PresentV
     public void onBindViewHolder(@NonNull PresentViewHolder holder, int position) {
         Data data = dataList.get(position);
 
-        holder.today_weather_time.setText(data.getText()+"신촌");
+       // holder.today_weather_time.setText(data.);
         holder.today_weather_icon.setImageResource(data.getImg());
-        holder.today_weather_temperature.setText(data.getText()+"18도");
+        //holder.today_weather_temperature.setText(data.);
 
     }
 
