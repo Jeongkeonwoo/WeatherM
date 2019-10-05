@@ -24,7 +24,7 @@ public class WeatherData {
 
     private CoordBean coord;
     private String base;
-    private MainBean main;
+    private MainBean main;//최고 main.temp_max 최저/main.temp_main
     private WindBean wind;
     private CloudsBean clouds;
     private int dt;
@@ -33,7 +33,7 @@ public class WeatherData {
     private int id;
     private String name;
     private int cod;
-    private List<WeatherBean> weather;
+    private List<WeatherBean> weather; //날씨 icon
 
     public CoordBean getCoord() {
         return coord;

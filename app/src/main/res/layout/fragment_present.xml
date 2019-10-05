@@ -50,7 +50,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#414040"
+            android:background="#312F2F"
+            android:textColor="@color/colorAccent"
             android:text="오늘 온도"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -61,6 +62,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/present_recyclerview"
         android:layout_width="match_parent"
+        android:padding="8dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal" />
