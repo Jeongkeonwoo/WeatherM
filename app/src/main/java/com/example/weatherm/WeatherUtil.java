@@ -1,12 +1,19 @@
 package com.example.weatherm;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class WeatherUtil {
 
+    // kelvin 온도를 celsius 온도로 변환
     public static String getCelsius(double kelvin) {
         int iKelvin = (int) kelvin;
         return String.valueOf(iKelvin - 273);
     }
 
+    // weatherId에 따라 icon 리턴
     public static int getWeatherIcon(int weatherId) {
         // 2xx thunderstorm
         if (weatherId >= 200 && weatherId < 300) {
@@ -40,7 +47,33 @@ public class WeatherUtil {
         else {
             return R.drawable.ic_smile;
         }
+    }
 
+    // ex) 오후 11시
+    public static String getHour(String strDate) {
+        String result = "";
+
+        SimpleDateFormat formatYMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            Date date = formatYMDHMS.parse(strDate);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.HOUR, 9);
+
+            Date koreaDate = new Date();
+            koreaDate.setTime(calendar.getTimeInMillis());
+
+            SimpleDateFormat formatH = new SimpleDateFormat("a hh");
+
+            result = formatH.format(koreaDate);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 }

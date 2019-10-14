@@ -1,6 +1,5 @@
 package com.example.weatherm.fragment.preset;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,15 +14,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.weatherm.Data;
+import com.example.weatherm.data.Data;
 import com.example.weatherm.MainActivity;
 import com.example.weatherm.R;
-import com.example.weatherm.WeatherData;
+import com.example.weatherm.data.ForecastData;
+import com.example.weatherm.data.WeatherData;
 import com.example.weatherm.WeatherManager;
 import com.example.weatherm.WeatherUtil;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PresentFragment extends Fragment {
@@ -36,8 +36,10 @@ public class PresentFragment extends Fragment {
     private ImageView presentWeatherIcon;
 
     private PresentAdapter presentAdapter;
-    private final int WEATHER = 24;
     private WeatherManager weatherManager;
+
+    // 3시간별로 출력할 날씨 개수
+    private final int WEATHER_COUNT = 10;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -56,38 +58,24 @@ public class PresentFragment extends Fragment {
         presentWeatherIcon = view.findViewById(R.id.present_weather_icon);
         recyclerView = view.findViewById(R.id.present_recyclerview);
 
-        ArrayList<Data> data = new ArrayList<>();
-
-        for (int i = 0; i < WEATHER; i++) {
-//            data.add(new Data(R.mipmap.ic_launcher, i + 1 + ""));
-        }
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        presentAdapter = new PresentAdapter();
-
-        presentAdapter.setData(data);
-
-        recyclerView.setAdapter(presentAdapter);
-
-
         // api 요청
         activity.showProgress("날씨 요청 중입니다.");
 
         weatherManager = new WeatherManager(activity, new WeatherManager.OnChangeWeather() {
             @Override
-            public void change(WeatherData weatherData) {
+            public void change(WeatherData weatherData, ForecastData forecastData) {
                 // api 응답 완료시 실행
                 activity.hideProgress();
-                load(weatherData);
+
+                loadTop(weatherData);
+                loadBottom(forecastData);
             }
         });
 
         return view;
     }
 
-    private void load(WeatherData weatherData) {
+    private void loadTop(WeatherData weatherData) {
 
         // 현재 도시 이름
         presentWeatherCity.setText(weatherData.getName());
@@ -100,5 +88,23 @@ public class PresentFragment extends Fragment {
         // 현재 온도
         String temp = WeatherUtil.getCelsius(weatherData.getMain().getTemp());
         presentWeatherTemperature.setText(temp + "˚");
+    }
+
+    private void loadBottom(ForecastData forecastData) {
+
+        List<ForecastData.ListBean> forecastList = new ArrayList<>();
+
+        for (int i = 0; i < WEATHER_COUNT; i++) {
+            forecastList.add(forecastData.getList().get(i));
+        }
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        presentAdapter = new PresentAdapter(forecastList);
+
+//        presentAdapter.setData(forecastList);
+
+        recyclerView.setAdapter(presentAdapter);
     }
 }

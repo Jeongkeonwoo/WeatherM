@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.weatherm.Data;
+import com.example.weatherm.data.Data;
 import com.example.weatherm.R;
 
 import java.util.ArrayList;

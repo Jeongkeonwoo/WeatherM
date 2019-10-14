@@ -1,6 +1,7 @@
 package com.example.weatherm.api_retrofit;
 
-import com.example.weatherm.WeatherData;
+import com.example.weatherm.data.WeatherData;
+import com.example.weatherm.data.ForecastData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiManager {
 
@@ -63,5 +63,15 @@ public class ApiManager {
         map.put("lon", lon);
 
         return weatherService.getWeather(map);
+    }
+
+    // api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
+    public Call<ForecastData> getForecastByLatitude(String lat, String lon) {
+        Map<String, String> map = new HashMap<>();
+        map.put("APPID", APP_ID);
+        map.put("lat", lat);
+        map.put("lon", lon);
+
+        return weatherService.getForecast(map);
     }
 }

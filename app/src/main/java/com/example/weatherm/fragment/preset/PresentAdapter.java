@@ -1,5 +1,6 @@
 package com.example.weatherm.fragment.preset;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,20 +10,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.weatherm.Data;
+import com.example.weatherm.WeatherUtil;
+import com.example.weatherm.data.Data;
 import com.example.weatherm.R;
+import com.example.weatherm.data.ForecastData;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.PresentViewHolder> {
 
-    private ArrayList<Data> dataList;
+    private List<ForecastData.ListBean> forecastList;
     //Adapter 에 전달해 사용할 List 형의 데이터
 
-    //Adapter 의 전달에 사용할 List 형의 데이터 세팅
-    public void setData(ArrayList<Data> list) {
-        dataList = list;
+    public PresentAdapter(List<ForecastData.ListBean> forecastList) {
+        this.forecastList = forecastList;
     }
+
+    //Adapter 의 전달에 사용할 List 형의 데이터 세팅
+//    public void setData(List<ForecastData.ListBean> forecastList) {
+//        forecastList = forecastList;
+//    }
 
     @NonNull
     @Override
@@ -35,17 +44,25 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.PresentV
 
     @Override
     public void onBindViewHolder(@NonNull PresentViewHolder holder, int position) {
-        Data data = dataList.get(position);
 
-       // holder.today_weather_time.setText(data.);
-        holder.today_weather_icon.setImageResource(data.getImg());
-        //holder.today_weather_temperature.setText(data.);
+        ForecastData.ListBean forecastBean = forecastList.get(position);
+
+        Log.d("PresentAdatper", "getHour : " + WeatherUtil.getHour(forecastBean.getDt_txt()));
+
+        holder.today_weather_time.setText(WeatherUtil.getHour(forecastBean.getDt_txt()));
+
+        int weatherId = forecastBean.getWeather().get(0).getId();
+        int imageResource = WeatherUtil.getWeatherIcon(weatherId);
+        holder.today_weather_icon.setImageResource(imageResource);
+
+        String temp = WeatherUtil.getCelsius(forecastBean.getMain().getTemp());
+        holder.today_weather_temperature.setText(temp + "˚");
 
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return forecastList.size();
     }
 
     static class PresentViewHolder extends RecyclerView.ViewHolder {

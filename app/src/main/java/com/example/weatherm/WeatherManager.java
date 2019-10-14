@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.weatherm.api_okhttp.HttpConnection;
 import com.example.weatherm.api_retrofit.ApiManager;
+import com.example.weatherm.data.ForecastData;
+import com.example.weatherm.data.WeatherData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,6 +48,7 @@ public class WeatherManager {
 
         // 5분마다 or 100m 마다 위치 정보 갱신
         locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, mLocationListener, null);
+        locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, mLocationListener, null);
 
 //        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 //                30000, 100, mLocationListener);
@@ -82,7 +85,7 @@ public class WeatherManager {
         }
     };
 
-    private void requestWeather(String lat, String lon) {
+    private void requestWeather(final String lat, final String lon) {
 
         // OkHttp의 Call 이랑 클래스명이 겹쳐서 retrofit2.Call 을 써준것
 
@@ -96,14 +99,43 @@ public class WeatherManager {
             // 응답 성공
             @Override
             public void onResponse(retrofit2.Call<WeatherData> call, retrofit2.Response<WeatherData> response) {
-                Log.d("Retrofit", "onResponse");
-                onChangeWeather.change(response.body());
+                Log.d("Retrofit", "requestWeather : onResponse");
+//                onChangeWeather.change(response.body());
+                WeatherData weatherData = response.body();
+
+                // 시간별 날씨 요청
+                requestForecast(weatherData, lat, lon);
             }
 
             // 응답 실패
             @Override
             public void onFailure(retrofit2.Call<WeatherData> call, Throwable t) {
-                Log.d("Retrofit", "onFailure");
+                Log.d("Retrofit", "requestWeather : onFailure");
+                Toast.makeText(activity, "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show();
+
+                if (activity instanceof MainActivity) {
+                    ((MainActivity) activity).hideProgress();
+                }
+            }
+        });
+    }
+
+    private void requestForecast(final WeatherData weatherData , String lat, String lon) {
+        // 3시간별 날씨 요청
+        retrofit2.Call<ForecastData> response = apiManager.getForecastByLatitude(lat, lon);
+
+        response.enqueue(new retrofit2.Callback<ForecastData>() {
+            @Override
+            public void onResponse(retrofit2.Call<ForecastData> call, retrofit2.Response<ForecastData> response) {
+                Log.d("Retrofit", "requestForecast : onResponse");
+
+                ForecastData forecastData = response.body();
+                onChangeWeather.change(weatherData, forecastData);
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<ForecastData> call, Throwable t) {
+                Log.d("Retrofit", "requestForecast : onFailure");
                 Toast.makeText(activity, "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show();
 
                 if (activity instanceof MainActivity) {
@@ -137,6 +169,6 @@ public class WeatherManager {
     }
 
     public interface OnChangeWeather {
-        void change(WeatherData weatherData);
+        void change(WeatherData weatherData, ForecastData forecastData);
     }
 }
