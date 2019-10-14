@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiManager {
 
     private final String APP_ID = "10465524bfe7eaa71c4010cb81b84a11";
-    private WeatherService weatherService;
+    public WeatherService weatherService;
 
     private static ApiManager apiManager = new ApiManager();
 

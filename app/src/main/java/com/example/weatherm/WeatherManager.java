@@ -19,6 +19,8 @@ import com.example.weatherm.data.WeatherData;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -33,6 +35,7 @@ public class WeatherManager {
     private ApiManager apiManager;
 
     public WeatherManager(Activity activity, OnChangeWeather onChangeWeather) {
+
         this.activity = activity;
         this.onChangeWeather = onChangeWeather;
 
@@ -43,13 +46,19 @@ public class WeatherManager {
 
         if (activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // 권한 없으면 메소드 실행 중지
+            Toast.makeText(activity, "날씨 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+
+            if (activity instanceof MainActivity) {
+                ((MainActivity) activity).hideProgress();
+            }
             return;
         }
 
-        // 5분마다 or 100m 마다 위치 정보 갱신
+        //위도 경도를 가져옴.
         locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, mLocationListener, null);
         locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, mLocationListener, null);
 
+        // 5분마다 or 100m 마다 위치 정보 갱신
 //        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 //                30000, 100, mLocationListener);
 //        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
@@ -66,6 +75,7 @@ public class WeatherManager {
             String lat = String.format("%.2f", latitude);
             String lon = String.format("%.2f", longitude);
 
+            // api 호출
             requestWeather(lat, lon);
         }
 

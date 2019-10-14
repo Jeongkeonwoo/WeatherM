@@ -31,9 +31,9 @@ public class PresentFragment extends Fragment {
     private MainActivity activity;
 
     private RecyclerView recyclerView;
-    private TextView presentWeatherTemperature;
-    private TextView presentWeatherCity;
-    private ImageView presentWeatherIcon;
+    private TextView presentWeatherTemperature; //온도
+    private TextView presentWeatherCity; //도시
+    private ImageView presentWeatherIcon; //날씨 이미지
 
     private PresentAdapter presentAdapter;
     private WeatherManager weatherManager;
@@ -41,6 +41,7 @@ public class PresentFragment extends Fragment {
     // 3시간별로 출력할 날씨 개수
     private final int WEATHER_COUNT = 10;
 
+    //context 를 매개변수로 받아 context 를 MainActivity 타입으로 강제 형변환.?
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -51,14 +52,16 @@ public class PresentFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //view 를 inflater 을 하여 객체화 시킴
         View view = inflater.inflate(R.layout.fragment_present, null);
 
+        //view 의 instance 를 얻어옴.
         presentWeatherTemperature = view.findViewById(R.id.present_weather_temperature);
         presentWeatherCity = view.findViewById(R.id.present_weather_city);
         presentWeatherIcon = view.findViewById(R.id.present_weather_icon);
         recyclerView = view.findViewById(R.id.present_recyclerview);
 
-        // api 요청
+        //app 로딩중을 표시
         activity.showProgress("날씨 요청 중입니다.");
 
         weatherManager = new WeatherManager(activity, new WeatherManager.OnChangeWeather() {
