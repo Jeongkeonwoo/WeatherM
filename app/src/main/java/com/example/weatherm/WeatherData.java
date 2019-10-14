@@ -20,6 +20,7 @@ public class WeatherData {
      * id : 1851632
      * name : Shuzenji
      * cod : 200
+     * https://openweathermap.org/current
      */
 
     private CoordBean coord;

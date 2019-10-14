@@ -27,15 +27,14 @@ public class IntroActivity extends AppCompatActivity {
 
             int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
-            if(permissionCheck == PackageManager.PERMISSION_DENIED){
+            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
 
-                // 권한 없음
+                // 권한 없으면이 없으면 팝업창 띄어줌
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         REQUEST_ACCESS_FINE_LOCATION);
 
-
-            } else{
+            } else {
 
                 // ACCESS_FINE_LOCATION 에 대한 권한이 이미 있음.
 
@@ -45,12 +44,18 @@ public class IntroActivity extends AppCompatActivity {
                     public void run() {
                         Intent intent = MainActivity.createIntent(IntroActivity.this);
                         startActivity(intent);
+                        finish();
                     }
                 }, 3000);
             }
+        }else{
+            //마시멜로 이하버전 지원안함.
+            finish();
         }
+
     }
 
+    //콜백 메소드
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -63,6 +68,7 @@ public class IntroActivity extends AppCompatActivity {
             // ACCESS_FINE_LOCATION 에 대한 권한 획득.
             Intent intent = MainActivity.createIntent(IntroActivity.this);
             startActivity(intent);
+            finish();
 
         } else {
             // ACCESS_FINE_LOCATION 에 대한 권한 거부.
