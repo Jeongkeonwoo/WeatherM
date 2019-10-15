@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 사용자의 입력을 제한
-    // 화면전환, api 요청시에 사용
+    // api 요청시에 사용
     private ProgressDialog pd;
 
     @Override
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    //ProgressDialog 출력 메소드
     public void showProgress(String message) {
         if (pd != null) {
             pd.dismiss();
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         pd.show();
     }
 
+    //다이얼로그 종료 메소드
     public void hideProgress() {
         if (pd != null) {
             pd.dismiss();

@@ -11,13 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherm.WeatherUtil;
-import com.example.weatherm.data.Data;
 import com.example.weatherm.R;
 import com.example.weatherm.data.ForecastData;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.PresentViewHolder> {
 
@@ -49,12 +45,15 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.PresentV
 
         Log.d("PresentAdatper", "getHour : " + WeatherUtil.getHour(forecastBean.getDt_txt()));
 
+        //시간
         holder.today_weather_time.setText(WeatherUtil.getHour(forecastBean.getDt_txt()));
 
+        //이미지
         int weatherId = forecastBean.getWeather().get(0).getId();
         int imageResource = WeatherUtil.getWeatherIcon(weatherId);
         holder.today_weather_icon.setImageResource(imageResource);
 
+        //온도
         String temp = WeatherUtil.getCelsius(forecastBean.getMain().getTemp());
         holder.today_weather_temperature.setText(temp + "˚");
 

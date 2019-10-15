@@ -11,20 +11,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.weatherm.api_okhttp.HttpConnection;
 import com.example.weatherm.api_retrofit.ApiManager;
 import com.example.weatherm.data.ForecastData;
 import com.example.weatherm.data.WeatherData;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WeatherManager {
 
@@ -103,12 +96,12 @@ public class WeatherManager {
 //        retrofit2.Call<String> response = apiManager.getWeather("Seoul");
 
         // 위도 경도로 날씨 요청
-        retrofit2.Call<WeatherData> response = apiManager.getWeatherByLatitude(lat, lon);
+        Call<WeatherData> response = apiManager.getWeatherByLatitude(lat, lon);
 
-        response.enqueue(new retrofit2.Callback<WeatherData>() {
+        response.enqueue(new Callback<WeatherData>() {
             // 응답 성공
             @Override
-            public void onResponse(retrofit2.Call<WeatherData> call, retrofit2.Response<WeatherData> response) {
+            public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
                 Log.d("Retrofit", "requestWeather : onResponse");
 //                onChangeWeather.change(response.body());
                 WeatherData weatherData = response.body();
@@ -119,7 +112,7 @@ public class WeatherManager {
 
             // 응답 실패
             @Override
-            public void onFailure(retrofit2.Call<WeatherData> call, Throwable t) {
+            public void onFailure(Call<WeatherData> call, Throwable t) {
                 Log.d("Retrofit", "requestWeather : onFailure");
                 Toast.makeText(activity, "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show();
 
@@ -132,11 +125,11 @@ public class WeatherManager {
 
     private void requestForecast(final WeatherData weatherData , String lat, String lon) {
         // 3시간별 날씨 요청
-        retrofit2.Call<ForecastData> response = apiManager.getForecastByLatitude(lat, lon);
+        Call<ForecastData> response = apiManager.getForecastByLatitude(lat, lon);
 
-        response.enqueue(new retrofit2.Callback<ForecastData>() {
+        response.enqueue(new Callback<ForecastData>() {
             @Override
-            public void onResponse(retrofit2.Call<ForecastData> call, retrofit2.Response<ForecastData> response) {
+            public void onResponse(Call<ForecastData> call, Response<ForecastData> response) {
                 Log.d("Retrofit", "requestForecast : onResponse");
 
                 ForecastData forecastData = response.body();
@@ -144,10 +137,11 @@ public class WeatherManager {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<ForecastData> call, Throwable t) {
+            public void onFailure(Call<ForecastData> call, Throwable t) {
                 Log.d("Retrofit", "requestForecast : onFailure");
                 Toast.makeText(activity, "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show();
 
+                //다이얼로그 종료
                 if (activity instanceof MainActivity) {
                     ((MainActivity) activity).hideProgress();
                 }
@@ -155,6 +149,7 @@ public class WeatherManager {
         });
     }
 
+    /*
     private void initOkHttp() {
         // 통신을 할 땐, manifest에 인터넷 허용 권한을 넣어줘야함
         // OkHttp로 통신 시작
@@ -177,6 +172,7 @@ public class WeatherManager {
         });
         // OkHttp로 통신 끝
     }
+     */
 
     public interface OnChangeWeather {
         void change(WeatherData weatherData, ForecastData forecastData);

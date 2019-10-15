@@ -104,10 +104,8 @@ public class PresentFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        //생성자로 forecastList 데이터 전달
         presentAdapter = new PresentAdapter(forecastList);
-
-//        presentAdapter.setData(forecastList);
-
         recyclerView.setAdapter(presentAdapter);
     }
 }
