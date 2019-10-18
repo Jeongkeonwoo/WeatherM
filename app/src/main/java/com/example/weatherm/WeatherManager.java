@@ -139,6 +139,7 @@ public class WeatherManager {
             @Override
             public void onFailure(Call<ForecastData> call, Throwable t) {
                 Log.d("Retrofit", "requestForecast : onFailure");
+                Log.d("Retrofit", "requestForecast error message : " + t.getMessage());
                 Toast.makeText(activity, "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show();
 
                 //다이얼로그 종료

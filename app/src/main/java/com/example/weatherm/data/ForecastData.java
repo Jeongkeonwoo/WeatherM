@@ -16,7 +16,7 @@ public class ForecastData {
      */
 
     private String cod;
-    private int message;
+    private double message;
     private int cnt;
     private CityBean city;
     private List<ListBean> list;
@@ -25,7 +25,7 @@ public class ForecastData {
         return cod;
     }
 
-    public int getMessage() {
+    public double getMessage() {
         return message;
     }
 
@@ -177,8 +177,8 @@ public class ForecastData {
             private double temp;
             private double temp_min;
             private double temp_max;
-            private int pressure;
-            private int sea_level;
+            private double pressure;
+            private double sea_level;
             private double grnd_level;
             private int humidity;
             private double temp_kf;
@@ -195,11 +195,11 @@ public class ForecastData {
                 return temp_max;
             }
 
-            public int getPressure() {
+            public double getPressure() {
                 return pressure;
             }
 
-            public int getSea_level() {
+            public double getSea_level() {
                 return sea_level;
             }
 

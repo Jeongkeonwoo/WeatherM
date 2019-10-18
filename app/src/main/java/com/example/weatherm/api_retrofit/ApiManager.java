@@ -32,6 +32,8 @@ public class ApiManager {
         // 2. 서울 날씨 : 3시간 간격
         // api.openweathermap.org/data/2.5/forecast?q=Seoul&APPID=10465524bfe7eaa71c4010cb81b84a11
 
+        // 3. 일주일
+        // api.openweathermap.org/data/2.5/forecast?lon=126.94&lat=37.56&APPID=10465524bfe7eaa71c4010cb81b84a11&cnt=7
         // log
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

@@ -20,11 +20,12 @@ import java.util.List;
 
 public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeHolder> {
 
-//    private List<Data> dataList;
+    //    private List<Data> dataList;
     private List<ForecastData.ListBean> forecastList;
+
     //Adapter 에 전잘해 사용할 List 형의 데이터
 /////////////////////////////////////////////////////////////
-    public DaytimeAdapter(List<ForecastData.ListBean> forecastList){
+    public DaytimeAdapter(List<ForecastData.ListBean> forecastList) {
         this.forecastList = forecastList;
     }
 //    public void setDataList(ArrayList<Data> dataList) {
@@ -50,7 +51,7 @@ public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeH
 
         ForecastData.ListBean forecastBean = forecastList.get(position);
 
-        Log.d("DaytimeAdapter","getHour"+ WeatherUtil.getHour(forecastBean.getDt_txt()));
+        Log.d("DaytimeAdapter", "getHour" + WeatherUtil.getHour(forecastBean.getDt_txt()));
 
         holder.daytime_weather_date.setText(WeatherUtil.getHour(forecastBean.getDt_txt()));
 
@@ -58,8 +59,11 @@ public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeH
         int imageResource = WeatherUtil.getWeatherIcon(weatherId);
         holder.daytime_weather_icon.setImageResource(imageResource);
 
-        String temp = WeatherUtil.getCelsius(forecastBean.getMain().getTemp());
-        holder.daytime_weather_hightemperature.setText(temp+"˚");
+        String high = WeatherUtil.getCelsius(forecastBean.getMain().getTemp_max());
+        holder.daytime_weather_hightemperature.setText(high + "˚");
+
+        String low = WeatherUtil.getCelsius(forecastBean.getMain().getTemp_min());
+        holder.daytime_weather_lowtemperature.setText(low + "˚");
 //        holder.daytime_weather_weekly.setText(data.getWeekly());
 //        //요일
 //        holder.daytime_weather_date.setText(data.getDate());
