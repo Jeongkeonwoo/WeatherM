@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
-        android:text="23도"
+        android:text="최고"
         app:layout_constraintEnd_toStartOf="@+id/daytime_weather_lowtemperature"
         app:layout_constraintStart_toEndOf="@+id/daytime_weather_icon"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +50,7 @@
         android:id="@+id/daytime_weather_lowtemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="17도"
+        android:text="최저"
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/daytime_weather_hightemperature"
