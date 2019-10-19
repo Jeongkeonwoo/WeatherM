@@ -43,10 +43,8 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.PresentV
 
         ForecastData.ListBean forecastBean = forecastList.get(position);
 
-        Log.d("PresentAdatper", "getHour : " + WeatherUtil.getHour(forecastBean.getDt_txt()));
-
         //시간
-        holder.today_weather_time.setText(WeatherUtil.getHour(forecastBean.getDt_txt()));
+        holder.today_weather_time.setText(WeatherUtil.getHour(forecastBean.getDt()));
 
         //이미지
         int weatherId = forecastBean.getWeather().get(0).getId();

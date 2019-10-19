@@ -50,28 +50,20 @@ public class WeatherUtil {
     }
 
     // ex) 오후 11시
-    public static String getHour(String strDate) {
+    // 대한민국은 time 보다 9시간 빠름
+    public static String getHour(long time) {
         String result = "";
 
-        SimpleDateFormat formatYMDHMS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        calendar.add(Calendar.HOUR, 9);
 
-        try {
-            Date date = formatYMDHMS.parse(strDate);
+        Date koreaDate = new Date();
+        koreaDate.setTime(calendar.getTimeInMillis());
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            calendar.add(Calendar.HOUR, 9);
+        SimpleDateFormat formatH = new SimpleDateFormat("a hh");
 
-            Date koreaDate = new Date();
-            koreaDate.setTime(calendar.getTimeInMillis());
-
-            SimpleDateFormat formatH = new SimpleDateFormat("a hh");
-
-            result = formatH.format(koreaDate);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        result = formatH.format(koreaDate);
 
         return result;
     }
