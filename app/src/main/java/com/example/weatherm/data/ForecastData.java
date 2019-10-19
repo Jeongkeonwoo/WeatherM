@@ -119,7 +119,7 @@ public class ForecastData {
          * rain : {"3h":0.062}
          */
 
-        private int dt;
+        private long dt;
         private MainBean main;
         private CloudsBean clouds;
         private WindBean wind;
@@ -128,7 +128,7 @@ public class ForecastData {
         private RainBean rain;
         private List<WeatherBean> weather;
 
-        public int getDt() {
+        public long getDt() {
             return dt;
         }
 
@@ -148,7 +148,6 @@ public class ForecastData {
             return sys;
         }
 
-        // 대한민국은 9시간 이 시간보다 9시간 빠름
         public String getDt_txt() {
             return dt_txt;
         }

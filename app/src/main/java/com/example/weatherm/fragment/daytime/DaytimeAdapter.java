@@ -51,9 +51,7 @@ public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeH
 
         ForecastData.ListBean forecastBean = forecastList.get(position);
 
-        Log.d("DaytimeAdapter", "getHour" + WeatherUtil.getHour(forecastBean.getDt_txt()));
-
-        holder.daytime_weather_date.setText(WeatherUtil.getHour(forecastBean.getDt_txt()));
+        holder.daytime_weather_date.setText(WeatherUtil.getHour(forecastBean.getDt()));
 
         int weatherId = forecastBean.getWeather().get(0).getId();
         int imageResource = WeatherUtil.getWeatherIcon(weatherId);
