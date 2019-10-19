@@ -1,7 +1,5 @@
 package com.example.weatherm.data;
 
-import androidx.annotation.NonNull;
-
 import java.util.List;
 
 public class WeatherData {

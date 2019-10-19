@@ -14,23 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherm.MainActivity;
 import com.example.weatherm.WeatherManager;
-import com.example.weatherm.data.Data;
 import com.example.weatherm.R;
 import com.example.weatherm.data.ForecastData;
-import com.example.weatherm.data.WeatherData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DaytimeFragment extends Fragment {
 
-    private  MainActivity activity;
+    private MainActivity activity;
 
     private RecyclerView recyclerView;
     private DaytimeAdapter daytimeAdapter;
-    private WeatherManager weatherManager;
+
+//    private WeatherManager weatherManager;
     // 3시간별로 출력할 날씨 개수
     private final int WEATHER_COUNT = 10;
+
+    private ForecastData forecastData;
 
     //일주일 별로 출력할 날씨 개수
     private final int day = 7;
@@ -51,19 +52,25 @@ public class DaytimeFragment extends Fragment {
         //TextView textView = view.findViewById(R.id.text);
         recyclerView = view.findViewById(R.id.daytime_recyclerview);
 
-//        ArrayList<Data> data = new ArrayList<>();
-         weatherManager = new WeatherManager(activity, new WeatherManager.OnChangeWeather() {
-            @Override
-            public void change(WeatherData weatherData, ForecastData forecastData) {
-                //api 응답 완료시 실행.
-                activity.hideProgress();
+//        weatherManager = new WeatherManager(activity, new WeatherManager.OnChangeWeather() {
+//            @Override
+//            public void change(WeatherData weatherData, ForecastData forecastData) {
+//                //api 응답 완료시 실행.
+//                activity.hideProgress();
+//                loadWeekly(forecastData);
+//            }
+//        });
+        forecastData = activity.getForecastData();
 
-                loadWeekly(forecastData);
-            }
-        });
+        if (forecastData != null) {
+           loadWeekly();
+        }
+//        activity.hideProgress();
+//        loadWeekly(forecastData);
         return view;
     }
-    private void loadWeekly(ForecastData forecastData) {
+
+    private void loadWeekly() {
 
         List<ForecastData.ListBean> forecastList = new ArrayList<>();
 

@@ -11,11 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherm.WeatherUtil;
-import com.example.weatherm.data.Data;
 import com.example.weatherm.R;
 import com.example.weatherm.data.ForecastData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeHolder> {

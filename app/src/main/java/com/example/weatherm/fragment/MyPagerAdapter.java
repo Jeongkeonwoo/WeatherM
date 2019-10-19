@@ -18,6 +18,22 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     public MyPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
 
+        /* Activity -> Fragment 데이터 전달 : Bundle 통해서
+        Fragment presentFragment = new PresentFragment();
+        Fragment daytimeFragment = new DaytimeFragment();
+        Bundle presentBundle = new Bundle();
+        Bundle daytimeBundle = new Bundle();
+
+        presentBundle.putString("a", a);
+        daytimeBundle.putString("b", b);
+
+        presentFragment.setArguments(presentBundle);
+        daytimeFragment.setArguments(daytimeBundle);
+
+        mData = new ArrayList<>();
+        mData.add(presentFragment);
+        mData.add(daytimeFragment);
+         */
         mData = new ArrayList<>();
         mData.add(new PresentFragment());
         mData.add(new DaytimeFragment());

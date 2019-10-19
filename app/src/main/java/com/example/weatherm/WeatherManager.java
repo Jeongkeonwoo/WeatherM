@@ -23,7 +23,6 @@ public class WeatherManager {
 
     private Activity activity;
     private OnChangeWeather onChangeWeather;
-
     // 날씨
     private ApiManager apiManager;
 
@@ -60,6 +59,7 @@ public class WeatherManager {
 
     private final LocationListener mLocationListener = new LocationListener() {
 
+        //위치가 변경(응답)되었을때, onLocationChanged 실행
         @Override
         public void onLocationChanged(Location location) {
             double latitude = location.getLatitude();  // 위도
@@ -126,13 +126,13 @@ public class WeatherManager {
     private void requestForecast(final WeatherData weatherData , String lat, String lon) {
         // 3시간별 날씨 요청
         Call<ForecastData> response = apiManager.getForecastByLatitude(lat, lon);
-
         response.enqueue(new Callback<ForecastData>() {
             @Override
             public void onResponse(Call<ForecastData> call, Response<ForecastData> response) {
                 Log.d("Retrofit", "requestForecast : onResponse");
 
                 ForecastData forecastData = response.body();
+
                 onChangeWeather.change(weatherData, forecastData);
             }
 
