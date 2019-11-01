@@ -52,11 +52,6 @@ public class PresentFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-    /*    if (getArguments() != null) {
-            String a = getArguments().getString("a");
-            Log.d("getArguments", "onCreateView: a = " + a);
-        }*/
-
         //view 를 inflater 을 하여 객체화 시킴
         View view = inflater.inflate(R.layout.fragment_present, null);
 
@@ -66,19 +61,6 @@ public class PresentFragment extends Fragment {
         presentWeatherIcon = view.findViewById(R.id.present_weather_icon);
         recyclerView = view.findViewById(R.id.present_recyclerview);
 
-        //app 로딩중을 표시
-//        activity.showProgress("날씨 요청 중입니다.");
-
-        /*weatherManager = new WeatherManager(activity, new WeatherManager.OnChangeWeather() {
-            @Override
-            public void change(WeatherData weatherData, ForecastData forecastData) {
-                // api 응답 완료시 실행
-                activity.hideProgress();
-
-                loadTop(weatherData);
-                loadBottom(forecastData);
-            }
-        });*/
         weatherData = activity.getWeatherData();
         forecastData = activity.getForecastData();
 
