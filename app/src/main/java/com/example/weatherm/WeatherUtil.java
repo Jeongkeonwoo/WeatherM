@@ -1,9 +1,11 @@
 package com.example.weatherm;
 
-import java.text.ParseException;
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class WeatherUtil {
 
@@ -52,20 +54,69 @@ public class WeatherUtil {
     // ex) 오후 11시
     // 대한민국은 time 보다 9시간 빠름
     public static String getHour(long time) {
+        time = time * 1000;
+
         String result = "";
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time);
-        calendar.add(Calendar.HOUR, 9);
 
         Date koreaDate = new Date();
         koreaDate.setTime(calendar.getTimeInMillis());
 
-        SimpleDateFormat formatH = new SimpleDateFormat("a hh");
+        SimpleDateFormat formatH = new SimpleDateFormat("a hh", Locale.KOREA);
 
         result = formatH.format(koreaDate);
+
+        Log.d("Date", "getHour: " + result);
+        return result;
+    }
+
+    //일주일 요일 구하기
+    public static String getDay(long time) {
+        time = time * 1000;
+        String result = "";
+
+        Calendar toDay = Calendar.getInstance();
+        toDay.setTimeInMillis(time);
+
+        int day_to_week = toDay.get(Calendar.DAY_OF_WEEK);
+        Log.d("Date", "getDay: " + day_to_week);
+
+        if (day_to_week == 1)
+            result = "일요일";
+        if (day_to_week == 2)
+            result = "월요일";
+        if (day_to_week == 3)
+            result = "화요일";
+        if (day_to_week == 4)
+            result = "수요일";
+        if (day_to_week == 5)
+            result = "목요일";
+        if (day_to_week == 6)
+            result = "금요일";
+        if (day_to_week == 7)
+            result = "토요일";
 
         return result;
     }
 
+    //일주일 날짜 구하기
+    public static String getWeekly(long time) {
+        time = time * 1000;
+        String result = "";
+
+        //오늘 날짜부터 5일 후 날짜 구하기
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+
+        Date koreaDate = new Date();
+        koreaDate.setTime(calendar.getTimeInMillis());
+
+        SimpleDateFormat formatM = new SimpleDateFormat("MM/dd", Locale.KOREA);
+
+        result = formatM.format(koreaDate);
+
+        return result;
+    }
 }

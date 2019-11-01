@@ -18,17 +18,12 @@ import java.util.List;
 
 public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeHolder> {
 
-    //    private List<Data> dataList;
     private List<ForecastData.ListBean> forecastList;
 
     //Adapter 에 전잘해 사용할 List 형의 데이터
-/////////////////////////////////////////////////////////////
     public DaytimeAdapter(List<ForecastData.ListBean> forecastList) {
         this.forecastList = forecastList;
     }
-//    public void setDataList(ArrayList<Data> dataList) {
-//        this.dataList = dataList;
-//    }
 
     @NonNull
     @Override
@@ -45,12 +40,19 @@ public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeH
     //onCreateViewHolder() 에서 holder 를 return 받은 holder 에 데이터를 셋팅해준다.
     @Override
     public void onBindViewHolder(@NonNull DaytimeHolder holder, int position) {
-//        Data data = dataList.get(position);
 
         ForecastData.ListBean forecastBean = forecastList.get(position);
 
-        holder.daytime_weather_date.setText(WeatherUtil.getHour(forecastBean.getDt()));
+        //요일
+        long toDay = forecastBean.getDt();
+        String textWeekly = WeatherUtil.getDay(toDay);
+        holder.daytime_weather_weekly.setText(textWeekly);
 
+        //날짜
+        String textDate = WeatherUtil.getWeekly(toDay);
+        holder.daytime_weather_date.setText(textDate);
+
+        //날씨 이미지
         int weatherId = forecastBean.getWeather().get(0).getId();
         int imageResource = WeatherUtil.getWeatherIcon(weatherId);
         holder.daytime_weather_icon.setImageResource(imageResource);
@@ -60,16 +62,6 @@ public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeH
 
         String low = WeatherUtil.getCelsius(forecastBean.getMain().getTemp_min());
         holder.daytime_weather_lowtemperature.setText(low + "˚");
-//        holder.daytime_weather_weekly.setText(data.getWeekly());
-//        //요일
-//        holder.daytime_weather_date.setText(data.getDate());
-//        //날짜
-//        holder.daytime_weather_icon.setImageResource(data.getImg());
-//        //날씨이미지
-//        holder.daytime_weather_hightemperature.setText(data.getHight());
-//        //최고온도
-//        holder.daytime_weather_lowtemperature.setText(data.getLow());
-//        //최저온도
     }
 
     @Override
@@ -87,17 +79,16 @@ public class DaytimeAdapter extends RecyclerView.Adapter<DaytimeAdapter.DaytimeH
 
         public DaytimeHolder(@NonNull View itemView) {
             super(itemView);
-
-            daytime_weather_weekly = itemView.findViewById(R.id.daytime_weather_weekly);
             //요일
-            daytime_weather_date = itemView.findViewById(R.id.daytime_weather_date);
+            daytime_weather_weekly = itemView.findViewById(R.id.daytime_weather_weekly);
             //날짜
-            daytime_weather_icon = itemView.findViewById(R.id.daytime_weather_icon);
+            daytime_weather_date = itemView.findViewById(R.id.daytime_weather_date);
             //이미지 날씨
-            daytime_weather_hightemperature = itemView.findViewById(R.id.daytime_weather_hightemperature);
+            daytime_weather_icon = itemView.findViewById(R.id.daytime_weather_icon);
             //최고온도
-            daytime_weather_lowtemperature = itemView.findViewById(R.id.daytime_weather_lowtemperature);
+            daytime_weather_hightemperature = itemView.findViewById(R.id.daytime_weather_hightemperature);
             //최저온도
+            daytime_weather_lowtemperature = itemView.findViewById(R.id.daytime_weather_lowtemperature);
         }
     }
 }
