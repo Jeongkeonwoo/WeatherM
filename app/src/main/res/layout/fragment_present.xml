@@ -18,29 +18,29 @@
             android:id="@+id/present_weather_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="80dp"
+            android:layout_marginBottom="24dp"
             android:text="현재 도시"
             android:textColor="@color/colorAccent"
             android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/present_weather_icon"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintRight_toRightOf="parent" />
 
         <ImageView
             android:id="@+id/present_weather_icon"
             android:layout_width="120dp"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="h,1:1"
-            android:layout_margin="24dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/present_weather_city" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/present_weather_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="24dp"
+            android:layout_marginTop="24dp"
             android:text="온도"
             android:textColor="@color/colorAccent"
             android:textSize="50sp"
@@ -52,8 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#312F2F"
-            android:textColor="@color/colorAccent"
             android:text="오늘 온도"
+            android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -63,9 +63,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/present_recyclerview"
         android:layout_width="match_parent"
-        android:padding="8dp"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        android:padding="8dp" />
 
 </LinearLayout>
